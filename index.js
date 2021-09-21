@@ -34,10 +34,10 @@ cart.printCart()
 let singleSkuPromotions = promotions.filter(x=>x.isSingleSku)
 let multiSkuPromotions = promotions.filter(x=>!x.isSingleSku)
 
-console.log("Applying single sku promotions...")
+console.log("\n\nApplying single sku promotions...")
 applySingleSkuPromotions(cart,singleSkuPromotions)
 
-console.log("Applying multi sku promotions...")
+console.log("\n\nApplying multi sku promotions...")
 applyMultiSkuPromotions(cart,multiSkuPromotions)
 
 function applySingleSkuPromotions(cart, promotions){
@@ -52,8 +52,8 @@ function applySingleSkuPromotions(cart, promotions){
 
         // check if amount in cart is enough for promotion
         if (cart.items[key].amount >= promotion.skus.length) {
+            console.log("\nDISCOUNT! %d of %s for %d\n", promotion.skus.length, promotion.skus[0], promotion.price)
             cart.applySingleSkuPromotion(promotion)
-            cart.printCart()
         }
     })
 }
@@ -77,8 +77,8 @@ function applyMultiSkuPromotions(cart,promotions){
 
         // if all skus are in the cart with enough amount
         if (foundAllSku){
+            console.log("\nDISCOUNT! %s for %d\n", promotion.skus.join("+"), promotion.price)
             cart.applyMultiSkuPromotion(promotion)
-            cart.printCart()
         }
     })
 }

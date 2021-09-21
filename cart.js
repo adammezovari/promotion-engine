@@ -32,7 +32,6 @@ class Cart {
         let apply = parseInt((this.items[promotion.skus[0]].amount - this.items[promotion.skus[0]].usedForPromotion) / promotion.skus.length)
         
         for (let i = 0; i<apply;i++){
-            console.log("DISCOUNT! %d of %s for %d", promotion.skus.length, promotion.skus[0], promotion.price)
             this.items[promotion.skus[0]].usedForPromotion += promotion.skus.length
             this.total -= promotion.skus.length*this.items[promotion.skus[0]].unitPrice
             this.total += promotion.price
@@ -41,7 +40,6 @@ class Cart {
     }
 
     applyMultiSkuPromotion(promotion){
-        console.log("DISCOUNT! %s for %d", promotion.skus.join("+"), promotion.price)
         promotion.skus.forEach(sku => {
             this.items[sku].usedForPromotion += 1
             this.total -= this.items[sku].unitPrice
