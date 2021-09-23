@@ -6,6 +6,9 @@ class Cart {
     }
 
     addItem(item){
+        if (!item) {
+            throw Error("Missing item");
+        }
         if (Object.keys(this.items).includes(item.sku)) {
             this.items[item.sku].amount++
         } else {
@@ -29,6 +32,9 @@ class Cart {
     }
 
     applySingleSkuPromotion(promotion){
+        if (!promotion) {
+            throw Error("Missing promotion");
+        }
         let apply = parseInt((this.items[promotion.skus[0]].amount - this.items[promotion.skus[0]].usedForPromotion) / promotion.skus.length)
         
         for (let i = 0; i<apply;i++){
@@ -40,6 +46,9 @@ class Cart {
     }
 
     applyMultiSkuPromotion(promotion){
+        if (!promotion) {
+            throw Error("Missing promotion");
+        }
         promotion.skus.forEach(sku => {
             this.items[sku].usedForPromotion += 1
             this.total -= this.items[sku].unitPrice
@@ -49,7 +58,7 @@ class Cart {
     }
 
     printCart(){
-        console.log("Items: ", this.items, "\nTotal: ",this.total)
+        console.log("Items: ", this.items, "\nTotal: ",this.total+"\n")
     }
 }
 

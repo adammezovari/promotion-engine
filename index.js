@@ -7,7 +7,6 @@ let A = new Item("A",50);
 let B = new Item("B",30);
 let C = new Item("C",20);
 let D = new Item("D",15);
-let items = [A,B,C,D]
 
 // Initialize active promotions
 let promotionAs = new Promotion(["A","A","A"],130)
@@ -17,6 +16,7 @@ let promotions = [promotionAs,promotionBs,promotionCD]
 
 // Define shopping cart
 let cart = new Cart()
+// add items to cart
 cart.addItem(A)
 cart.addItem(A)
 cart.addItem(A)
@@ -29,15 +29,18 @@ cart.addItem(B)
 cart.addItem(B)
 cart.addItem(C)
 cart.addItem(D)
+
+// print initial cart
+console.log("Your cart before applying promotions:")
 cart.printCart()
 
 let singleSkuPromotions = promotions.filter(x=>x.isSingleSku)
 let multiSkuPromotions = promotions.filter(x=>!x.isSingleSku)
 
-console.log("\n\nApplying single sku promotions...")
+console.log("Applying single sku promotions...")
 applySingleSkuPromotions(cart,singleSkuPromotions)
 
-console.log("\n\nApplying multi sku promotions...")
+console.log("\nApplying multi sku promotions...")
 applyMultiSkuPromotions(cart,multiSkuPromotions)
 
 function applySingleSkuPromotions(cart, promotions){
@@ -52,7 +55,7 @@ function applySingleSkuPromotions(cart, promotions){
 
         // check if amount in cart is enough for promotion
         if (cart.items[key].amount >= promotion.skus.length) {
-            console.log("\nDISCOUNT! %d of %s for %d\n", promotion.skus.length, promotion.skus[0], promotion.price)
+            console.log("DISCOUNT! %d of %s for %d", promotion.skus.length, promotion.skus[0], promotion.price)
             cart.applySingleSkuPromotion(promotion)
         }
     })
@@ -77,10 +80,10 @@ function applyMultiSkuPromotions(cart,promotions){
 
         // if all skus are in the cart with enough amount
         if (foundAllSku){
-            console.log("\nDISCOUNT! %s for %d\n", promotion.skus.join("+"), promotion.price)
+            console.log("DISCOUNT! %s for %d", promotion.skus.join("+"), promotion.price)
             cart.applyMultiSkuPromotion(promotion)
         }
     })
 }
-
+console.log("\nYour cart after applying promotions:")
 cart.printCart()
