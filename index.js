@@ -36,49 +36,5 @@ cart.printCart()
 
 cart.checkout()
 
-// function applySingleSkuPromotions(cart, promotions){
-
-//     Object.keys(cart.items).forEach(key => {
-
-//         // find related promotions if any
-//         let promotion = promotions.find(x=> x.skus[0] === key)
-
-//         // if no promotions found, check next sku
-//         if (!promotion) return;
-
-//         // check if amount in cart is enough for promotion
-//         if (cart.items[key].amount >= promotion.skus.length) {
-//             console.log("DISCOUNT! %d of %s for %d", promotion.skus.length, promotion.skus[0], promotion.price)
-//             cart.applySingleSkuPromotion(promotion)
-//             return true
-//         }
-//     })
-//     return false
-// }
-
-// function applyMultiSkuPromotions(cart,promotions){
-   
-//     promotions.forEach(promotion=> {
-        
-//         // get list of available items for promotion
-//         let availableItems = cart.getAvailableItemsForPromotion()
-
-//         // check if all skus are in the cart for the promotion
-//         let foundAllSku = true
-
-//         // check each sku against cart and available amount for discount
-//         promotion.skus.forEach(sku =>{
-//             if(!availableItems.includes(sku)){
-//                 foundAllSku=false
-//             }
-//         });
-
-//         // if all skus are in the cart with enough amount
-//         if (foundAllSku){
-//             console.log("DISCOUNT! %s for %d", promotion.skus.join("+"), promotion.price)
-//             cart.applyMultiSkuPromotion(promotion)
-//         }
-//     })
-// }
 console.log("\nYour cart after applying promotions:")
 cart.printCart()
