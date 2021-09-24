@@ -26,13 +26,13 @@ describe("Cart tests", () => {
         expect(input.getAvailableItemsForPromotion()).toEqual(["A","B"]);
     });
 
-    test("Apply single SKU promotion ", () => {
-        const input = new Cart()
+    test("Apply promotions I", () => {
+        const input = new Cart([promotionAs,promotionAB])
         input.addItem(A)
         input.addItem(A)
         input.addItem(A)
         input.addItem(B)
-        input.applySingleSkuPromotion(promotionAs);
+        input.checkout();
         expect(input.total).toEqual(160);
         expect(input.items).toEqual({
             A: {amount: 3, usedForPromotion: 3, unitPrice: 50},
@@ -40,16 +40,17 @@ describe("Cart tests", () => {
         });
     });
 
-    test("Apply multi SKU promotion ", () => {
-        const input = new Cart()
+    test("Apply promotions II", () => {
+        const input = new Cart([promotionAs,promotionAB])
+        input.addItem(A)
         input.addItem(A)
         input.addItem(A)
         input.addItem(A)
         input.addItem(B)
-        input.applyMultiSkuPromotion(promotionAB);
-        expect(input.total).toEqual(170);
+        input.checkout();
+        expect(input.total).toEqual(200);
         expect(input.items).toEqual({
-            A: {amount: 3, usedForPromotion: 1, unitPrice: 50},
+            A: {amount: 4, usedForPromotion: 4, unitPrice: 50},
             B: {amount: 1, usedForPromotion: 1, unitPrice: 30},
         });
     });
